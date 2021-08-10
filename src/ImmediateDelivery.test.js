@@ -12,7 +12,7 @@ beforeEach(() => {
     productVariant1 = new ProductVariant(product1, 'L', 'blue', 'plastic', 50)
     saleRow1 = new SaleRow(productVariant1, 10)
     sale1 = new Sale('test', [saleRow1], Date.now())
-    sale1.getState().accept()
+    sale1.accept()
     sale1.setShippingStrategy(new Immediatedelivery(sale1))
 })
 

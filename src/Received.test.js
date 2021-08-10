@@ -24,27 +24,27 @@ test('Sale should have received state on creation', () => {
 })
 
 test('Can be cancelled', () => {
-    sale1.getState().cancel()
+    sale1.cancel()
     expect(sale1.getState()).toBeInstanceOf(Cancelled)
 })
 
 test('Can be accepted', () => {
-    sale1.getState().accept()
+    sale1.accept()
     expect(sale1.getState()).toBeInstanceOf(Accepted)
 })
 
 test('Can not be delivered', () => {
-    expect(() => sale1.getState().deliver().toThrow('Unpermitted Operation'))
+    expect(() => sale1.deliver().toThrow('Unpermitted Operation'))
 })
 
 test('Can not be received again', () => {
-    expect(() => sale1.getState().receive().toThrow('Unpermitted Operation'))
+    expect(() => sale1.receive().toThrow('Unpermitted Operation'))
 })
 
 test('It returns the stock when coming from accepted', () => {
     expect(productVariant1.getStock()).toBe(50)
-    sale1.getState().accept()
+    sale1.accept()
     expect(productVariant1.getStock()).toBe(49)
-    sale1.getState().receive()
+    sale1.receive()
     expect(productVariant1.getStock()).toBe(50)
 })

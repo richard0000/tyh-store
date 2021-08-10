@@ -78,6 +78,22 @@ class Sale {
     getShippingStrategy() {
         return this.shippingStrategy
     }
+
+    accept() {
+        this.currentState.accept()
+    }
+
+    cancel() {
+        this.currentState.cancel()
+    }
+
+    deliver() {
+        this.currentState.deliver()
+    }
+
+    receive() {
+        this.currentState.receive()
+    }
 }
 
 module.exports = Sale

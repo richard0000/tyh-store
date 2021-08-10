@@ -14,7 +14,7 @@ beforeEach(() => {
     productVariant1 = new ProductVariant(product1, 'L', 'blue', 'plastic', 50)
     saleRow1 = new SaleRow(productVariant1, 10)
     sale1 = new Sale('test', [saleRow1], Date.now())
-    sale1.getState().accept()
+    sale1.accept()
 })
 
 test('Should require sale on construction', () => {
@@ -23,13 +23,13 @@ test('Should require sale on construction', () => {
 
 test('Can be received', () => {
     expect(productVariant1.getStock()).toBe(40)
-    sale1.getState().receive()
+    sale1.receive()
     expect(sale1.getState()).toBeInstanceOf(Received)
     expect(productVariant1.getStock()).toBe(50)
 })
 
 test('Can be delivered', () => {
-    sale1.getState().deliver()
+    sale1.deliver()
     expect(sale1.getState()).toBeInstanceOf(Delivered)
     let deliveredDate = sale1.getState().getDeliveredDate()
     let today = new Date()
@@ -39,12 +39,12 @@ test('Can be delivered', () => {
 })
 
 test('Can be cancelled', () => {
-    sale1.getState().cancel()
+    sale1.cancel()
     expect(sale1.getState()).toBeInstanceOf(Cancelled)
 })
 
 test('Can not be accepted again', () => {
-    expect(() => sale1.getState().accept()).toThrow('Unpermitted operation')
+    expect(() => sale1.accept()).toThrow('Unpermitted operation')
 })
 
 test('Paid at should be today, now', () => {
